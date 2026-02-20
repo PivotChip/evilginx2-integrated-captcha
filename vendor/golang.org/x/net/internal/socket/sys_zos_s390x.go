@@ -5,7 +5,6 @@
 package socket
 
 import (
-	"net"
 	"syscall"
 	"unsafe"
 )

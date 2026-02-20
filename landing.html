@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Check</title>
+    {{if .IsV2}}
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    {{else}}
+    <script src="https://www.google.com/recaptcha/api.js?render={{.SiteKey}}"></script>
+    {{end}}
+    <style>
+        body { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; background: #f0f0f0; font-family: Arial, sans-serif; color: #555; }
+        .card { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: center; }
+        .loader { border: 4px solid #e0e0e0; border-top: 4px solid #3498db; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin-bottom: 20px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    {{if .IsV2}}
+    <div class="card">
+        <h2>Verify you are human</h2>
+        <form id="captcha-form" action="/verify-captcha" method="POST">
+            <input type="hidden" name="type" value="v2">
+            <div class="g-recaptcha" data-sitekey="{{.SiteKey}}" data-callback="onSubmit"></div>
+            <input type="hidden" name="original_url" value="{{.CurrentUrl}}">
+        </form>
+    </div>
+    <script>
+        function onSubmit(token) {
+            document.getElementById("captcha-form").submit();
+        }
+    </script>
+    <input type="hidden" name="error" value="{{.Error}}">
+    
+    {{else}}
+    <div class="loader"></div>
+    <h3>Checking browser security...</h3>
+    <form id="v3-form" action="/verify-captcha" method="POST" style="display:none;">
+        <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
+        <input type="hidden" name="original_url" value="{{.CurrentUrl}}">
+    </form>
+    <script>
+        grecaptcha.ready(function() {
+            grecaptcha.execute('{{.SiteKey}}', {action: 'submit'}).then(function(token) {
+                document.getElementById('g-recaptcha-response').value = token;
+                document.cookie = "gatewayurl={{.CurrentUrl}}; path=/";
+                document.getElementById('v3-form').submit();
+            });
+        });
+    </script>
+    {{end}}
+</body>
+</html>

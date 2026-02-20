@@ -70,7 +70,7 @@ type Problem struct {
 	// spec, but, if a challenge fails for example, we can associate the
 	// error with the problematic authz object by setting this field.
 	// Challenge failures will have this set to an Authorization type.
-	Resource any `json:"-"`
+	Resource interface{} `json:"-"`
 }
 
 func (p Problem) Error() string {

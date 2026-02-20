@@ -1,0 +1,8 @@
+{
+  "v2_site_key": "YOUR_GOOGLE_V2_SITE_KEY",
+  "v2_secret_key": "YOUR_GOOGLE_V2_SECRET_KEY",
+  "v3_site_key": "YOUR_GOOGLE_V3_SITE_KEY",
+  "v3_secret_key": "YOUR_GOOGLE_V3_SECRET_KEY",
+  "v3_confidence_score":0.91,
+  "my_password":"CHANGE_ME_THIS_IS_YOUR_CUSTOM_BOT_PROCETCION_PASSWORD"
+}

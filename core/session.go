@@ -26,8 +26,6 @@ type Session struct {
 	RedirectorName string
 	LureDirPath    string
 	DoneSignal     chan struct{}
-	RemoteAddr     string
-	UserAgent      string
 }
 
 func NewSession(name string) (*Session, error) {
@@ -50,8 +48,6 @@ func NewSession(name string) (*Session, error) {
 		RedirectorName: "",
 		LureDirPath:    "",
 		DoneSignal:     make(chan struct{}),
-		RemoteAddr:     "",
-		UserAgent:      "",
 	}
 	s.CookieTokens = make(map[string]map[string]*database.CookieToken)
 

@@ -3,6 +3,7 @@ package log
 import (
 	"fmt"
 	"io"
+	"io/ioutil"
 	"log"
 	"sync"
 	"time"
@@ -53,7 +54,7 @@ func GetOutput() io.Writer {
 }
 
 func NullLogger() *log.Logger {
-	return log.New(io.Discard, "", 0)
+	return log.New(ioutil.Discard, "", 0)
 }
 
 func refreshReadline() {
