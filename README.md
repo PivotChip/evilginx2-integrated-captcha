@@ -1,3 +1,13 @@
+# Instructions for this fork
+
+1. Create both Google Captcha V2 and V3 in the console
+2. Open file captcha.json
+2.1 Udate V2 and V3 secrets and site keys
+2.2 v3_confidence is set to 91%. It will make users to always solve V2 captcha. If you want to test with less V2 captcha that user will have to sove, set it from 0.6 to 0.8
+3. landing.html will show the landing page. Add required bells and whistles
+4. Typing "make" inside the project will build it
+5. Run as usual. Before user will ever see the lure, it will have to either get approved by V3 captcha or manually solve V2
+
 <p align="center">
   <img alt="Evilginx2 Logo" src="https://raw.githubusercontent.com/kgretzky/evilginx2/master/media/img/evilginx2-logo-512.png" height="160" />
   <p align="center">
